@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Saved Posts - Facebook</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-2"
+    >
+      <div class="container-fluid align-items-center">
+        <!-- Left: brand + search -->
+        <div class="d-flex align-items-center gap-3">
+          <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="dashboard.html"
+          >
+            <img src="logo.png" alt="logo" class="nav-logo" />
+          </a>
+
+          <form
+            class="d-none d-md-flex align-items-center search-form"
+            role="search"
+            onsubmit="return false;"
+          >
+            <i class="bi bi-search search-icon"></i>
+            <input
+              class="form-control search-input border-0 bg-light"
+              type="search"
+              placeholder="Search Saved Posts"
+              aria-label="Search"
+            />
+          </form>
+        </div>
+
+        <!-- Center: nav actions (icons) -->
+        <div class="mx-auto d-none d-lg-flex">
+          <ul class="nav nav-center align-items-center">
+            <li class="nav-item px-2">
+              <a
+                class="nav-link nav-center-link"
+                href="dashboard.html"
+                aria-label="Home"
+                ><i class="bi bi-house-door-fill" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="nav-item px-2">
+              <a class="nav-link nav-center-link" href="friends.html" aria-label="Friends"
+                ><i class="bi bi-people-fill" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="nav-item px-2">
+              <a class="nav-link nav-center-link active" href="saved.html" aria-label="Saved"
+                ><i class="bi bi-bookmark-fill" aria-hidden="true"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: quick actions + profile -->
+        <div class="d-flex align-items-center gap-2">
+          <button
+            class="btn btn-light rounded-circle action-btn"
+            aria-label="Apps"
+          >
+            <i class="bi bi-grid-3x3-gap"></i>
+          </button>
+          <button
+            class="btn btn-light rounded-circle action-btn"
+            onclick="window.location='massenger.html'"
+            aria-label="Messenger"
+          >
+            <i class="bi bi-chat-dots"></i>
+          </button>
+          <button
+            class="btn btn-light rounded-circle action-btn position-relative"
+            aria-label="Notifications"
+          >
+            <i class="bi bi-bell"></i>
+          </button>
+
+          <button
+            class="btn profile-icon btn-sm d-flex align-items-center justify-content-center btn"
+            onclick="window.location.href = 'profile.html';"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            U
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <div class="container-fluid mt-3">
+      <div class="row g-3 justify-content-center">
+        <!-- CENTER (saved posts) -->
+        <div class="col-lg-8 col-md-10">
+          <div class="center-container">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h4 class="fw-bold mb-0">Saved Posts</h4>
+              <span class="badge bg-primary" id="savedCount">0 posts</span>
+            </div>
+
+            <div class="posts-container" id="savedPostsContainer">
+              <!-- Saved posts will be displayed here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="saved.js"></script>
+  </body>
+</html>

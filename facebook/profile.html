@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook-style Profile Popup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            background: linear-gradient(to right, #1877f2, #0a58ca);
+            color: white;
+            padding: 20px;
+            position: relative;
+            height: 180px;
+        }
+        
+        .profile-cover {
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            border-radius: 8px 8px 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+        }
+        
+        .profile-info {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+        }
+        
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80') center/cover no-repeat;
+            margin-right: 20px;
+        }
+        
+        .profile-details {
+            padding-bottom: 10px;
+        }
+        
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .profile-friends {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+        
+        .profile-content {
+            display: flex;
+            padding: 20px;
+        }
+        
+        .left-column {
+            flex: 1;
+            padding-right: 20px;
+        }
+        
+        .right-column {
+            flex: 2;
+            border-left: 1px solid #e4e6eb;
+            padding-left: 20px;
+        }
+        
+        .info-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1c1e21;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #e4e6eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #65676b;
+        }
+        
+        .info-text {
+            color: #050505;
+            font-size: 15px;
+        }
+        
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .photo {
+            height: 100px;
+            border-radius: 8px;
+            background-color: #e4e6eb;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .photo-1 {
+            background-image: url('https://images.unsplash.com/photo-1529066516367-36973222c957?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .photo-2 {
+            background-image: url('https://images.unsplash.com/photo-1526662094736-43e3c841d2f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .photo-3 {
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .photo-4 {
+            background-image: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .photo-5 {
+            background-image: url('https://images.unsplash.com/photo-1517423447168-cb804aafa6e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .photo-6 {
+            background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 10px 0;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background-color: #e4e6eb;
+            color: #050505;
+            border: none;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            transition: background-color 0.2s;
+        }
+        
+        .close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .post {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e4e6eb;
+            margin-right: 10px;
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .post-author {
+            font-weight: 600;
+            color: #050505;
+        }
+        
+        .post-time {
+            font-size: 13px;
+            color: #65676b;
+        }
+        
+        .post-content {
+            color: #050505;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            background-color: #e4e6eb;
+            margin-bottom: 12px;
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .post-actions {
+            display: flex;
+            border-top: 1px solid #e4e6eb;
+            padding-top: 8px;
+        }
+        
+        .post-action {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 0;
+            color: #65676b;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .post-action:hover {
+            background-color: #f0f2f5;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-content {
+                flex-direction: column;
+            }
+            
+            .left-column, .right-column {
+                width: 100%;
+                padding: 0;
+                border: none;
+            }
+            
+            .left-column {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-cover"></div>
+            <button class="close-btn" title="Close profile" onclick="window.location='dashboard.html'">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="profile-info">
+                <div class="profile-picture"></div>
+                <div class="profile-details">
+                    <h1 class="profile-name">Alex Johnson</h1>
+                    <p class="profile-friends">387 friends</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-content">
+            <div class="left-column">
+                <div class="info-section">
+                    <h2 class="section-title">Intro</h2>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="info-text">Software Engineer at TechCorp</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="info-text">Studied Computer Science at Stanford University</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="info-text">Lives in San Francisco, California</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-text">From Seattle, Washington</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="info-text">In a relationship with Sarah Miller</div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Edit Details
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-plus"></i> Add Hobbies
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h2 class="section-title">Photos</h2>
+                    <div class="photos-grid">
+                        <div class="photo photo-1"></div>
+                        <div class="photo photo-2"></div>
+                        <div class="photo photo-3"></div>
+                        <div class="photo photo-4"></div>
+                        <div class="photo photo-5"></div>
+                        <div class="photo photo-6"></div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-images"></i> See All Photos
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h2 class="section-title">Friends</h2>
+                    <div class="photos-grid">
+                        <div class="photo photo-4"></div>
+                        <div class="photo photo-5"></div>
+                        <div class="photo photo-6"></div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-user-friends"></i> See All Friends
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-avatar"></div>
+                        <div>
+                            <div class="post-author">Alex Johnson</div>
+                            <div class="post-time">Yesterday at 5:23 PM</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Just got back from an amazing hiking trip in Yosemite! The views were absolutely breathtaking. Can't wait to go back again next year. 🏞️
+                    </div>
+                    <div class="post-image"></div>
+                    <div class="post-actions">
+                        <div class="post-action">
+                            <i class="far fa-thumbs-up"></i> Like
+                        </div>
+                        <div class="post-action">
+                            <i class="far fa-comment"></i> Comment
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-share"></i> Share
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-avatar"></div>
+                        <div>
+                            <div class="post-author">Alex Johnson</div>
+                            <div class="post-time">3 days ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Just launched a new project at work after months of hard work. So proud of my team for pulling this off! 🚀
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-action">
+                            <i class="far fa-thumbs-up"></i> Like
+                        </div>
+                        <div class="post-action">
+                            <i class="far fa-comment"></i> Comment
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-share"></i> Share
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

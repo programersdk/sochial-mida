@@ -1,0 +1,295 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f2f5;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo Section */
+.logo-section {
+    flex: 1;
+    max-width: 500px;
+    padding-right: 40px;
+}
+
+.logo {
+    font-size: 3.5rem;
+    color: #1877f2;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: #1c1e21;
+    line-height: 1.4;
+}
+
+/* Forms Section */
+.forms-section {
+    flex: 1;
+    max-width: 400px;
+}
+
+.form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#SignUp {
+    display: none;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-header h2 {
+    color: #1c1e21;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: #606770;
+    font-size: 0.95rem;
+}
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-form input,
+.auth-form select {
+    padding: 14px 16px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f5f6f7;
+    transition: border-color 0.2s;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+    border-color: #1877f2;
+    outline: none;
+    background: #fff;
+}
+
+.name-fields {
+    display: flex;
+    gap: 12px;
+}
+
+.name-fields input {
+    flex: 1;
+}
+
+.dob-fields {
+    display: flex;
+    gap: 8px;
+}
+
+.dob-fields select {
+    flex: 1;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    color: #606770;
+    font-weight: 600;
+    margin-bottom: -8px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: #1877f2;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background: #166fe5;
+}
+
+.btn-success {
+    background: #42b72a;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 8px;
+}
+
+.btn-success:hover {
+    background: #36a420;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #1877f2;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 12px;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+/* Form Links & Footer */
+.form-links {
+    text-align: center;
+    margin: 12px 0;
+}
+
+.link {
+    color: #1877f2;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    height: 1px;
+    background: #dadde1;
+    margin: 16px 0;
+}
+
+.form-footer {
+    text-align: center;
+}
+
+.disclaimer {
+    font-size: 0.75rem;
+    color: #777;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+/* Alert Styles */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-width: 300px;
+}
+
+.custom-alert.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.custom-alert.success {
+    background: #42b72a;
+}
+
+.custom-alert.error {
+    background: #fa383e;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .logo-section {
+        padding-right: 0;
+        max-width: 400px;
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+    }
+    
+    .tagline {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .form-container {
+        padding: 16px;
+    }
+    
+    .name-fields {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .custom-alert {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+}
+.error-message {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+input.error {
+  border-color: #d32f2f !important;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
