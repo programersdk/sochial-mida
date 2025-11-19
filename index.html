@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .loading-container {
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            margin: 2rem auto;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1.2s linear infinite;
+        }
+        
+        .loading-text {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: white;
+            border-radius: 3px;
+            animation: progress 3s ease-in-out infinite;
+        }
+        
+        .loading-dots {
+            display: inline-block;
+        }
+        
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; }
+            70% { width: 100%; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .loading-message {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+        
+        /* Simulate loading completion */
+        .content {
+            display: none;
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 600px) {
+            .loading-container, .content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container" id="loading">
+        <div class="logo">YourApp</div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading<span class="loading-dots"></span></div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+    
+    <div class="content" id="content">
+        <h1>Welcome to YourApp</h1>
+        <p>Your content has loaded successfully! This could be your dashboard, landing page, or any other content.</p>
+        <p>Refresh the page to see the loading animation again.</p>
+    </div>
+
+    <script>
+        // Simulate loading process
+        setTimeout(function() {
+               window.location.href=""
+        }, 5000); // Change this value to adjust loading time
+    </script>
+</body>
+</html>
